@@ -6,4 +6,5 @@ package uz.smt.mydictionary.presenter.screens.home
  */
 sealed interface HomeIntent {
     data class OpenItem(val id:String): HomeIntent
+    data object OpenCreateNewDictionary: HomeIntent
 }

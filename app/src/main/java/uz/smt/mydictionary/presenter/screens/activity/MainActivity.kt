@@ -4,44 +4,29 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.LaunchedEffect
+import cafe.adriel.voyager.navigator.Navigator
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.onEach
+import uz.smt.mydictionary.presenter.screens.home.HomeScreen
 import uz.smt.mydictionary.presenter.theme.MyDictionaryTheme
+import uz.smt.planningapp.presenter.navigation.Navigation
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             MyDictionaryTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                Navigator(screen = HomeScreen()){navigator->
+                    LaunchedEffect(key1 = navigator) {
+                        Navigation.dispatcher.onEach {navigateListener->
+                            navigateListener.invoke(navigator)
+                        }
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyDictionaryTheme {
-        Greeting("Android")
     }
 }

@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
+//    id("kotlin-kapt")
+    id("com.google.devtools.ksp") version "1.9.0-1.0.13"
     id("com.google.dagger.hilt.android")
 }
 
@@ -70,43 +71,71 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    // Navigator
+//   Navigator
+//   Voyager
     implementation(libs.voyager.navigator)
-
     // Screen Model
     implementation(libs.voyager.screenmodel)
-
     // BottomSheetNavigator
     implementation(libs.voyager.bottom.sheet.navigator)
-
     // TabNavigator
     implementation(libs.voyager.tab.navigator)
-
     // Transitions
     implementation(libs.voyager.transitions)
-
     // Android
-
     // Koin integration
 //    implementation("cafe.adriel.voyager:voyager-koin:1.1.0-beta02")
-
     // Hilt integration
     implementation(libs.voyager.hilt)
-
     // LiveData integration
     implementation(libs.voyager.livedata)
-
-//    // Desktop + Android
-//
-//    // Kodein integration
+    // Desktop + Android
+    // Kodein integration
 //    implementation("cafe.adriel.voyager:voyager-kodein:1.1.0-beta02")
-//
-//    // RxJava integration
-//    implementation("cafe.adriel.voyager:voyager-rxjava:1.1.0-beta02")
+    // RxJava integration
+    implementation(libs.voyager.rxjava)
 
+//    DI
+//    Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
+
+//   Storage
+//   DataStore
+//   Preference
+    implementation(libs.androidx.datastore.preferences)
+    // optional - RxJava2 support
+    implementation(libs.androidx.datastore.preferences.rxjava2)
+    // optional - RxJava3 support
+    implementation(libs.androidx.datastore.preferences.rxjava3)
+
+    //Proto DataStore
+    implementation(libs.androidx.datastore)
+    // optional - RxJava2 support
+    implementation(libs.androidx.datastore.rxjava2)
+    // optional - RxJava3 support
+    implementation(libs.androidx.datastore.rxjava3)
+
+//  Room
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    // To use Kotlin annotation processing tool (kapt)
+//    ksp("androidx.room:room-compiler:$room_version")
+    // To use Kotlin Symbol Processing (KSP)
+    ksp(libs.androidx.room.compiler)
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation(libs.androidx.room.ktx)
+    // optional - RxJava2 support for Room
+    implementation(libs.androidx.room.rxjava2)
+    // optional - RxJava3 support for Room
+    implementation(libs.androidx.room.rxjava3)
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation(libs.androidx.room.guava)
+    // optional - Test helpers
+    testImplementation(libs.androidx.room.testing)
+    // optional - Paging 3 Integration
+    implementation(libs.androidx.room.paging)
 }
-kapt {
-    correctErrorTypes = true
-}
+//kapt {
+//    correctErrorTypes = true
+//}

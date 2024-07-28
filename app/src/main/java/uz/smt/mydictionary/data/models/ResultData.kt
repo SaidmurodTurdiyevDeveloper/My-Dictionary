@@ -8,7 +8,6 @@ sealed class ResultData<T> {
     data class Success<T>(var result: T) : ResultData<T>()
     data class Error<T>(
         override val message: String? = null,
-        override val error: Throwable? = null,
-        override val data: T?=null
-    ) : UserError<T>(message = message, error = error, data = data)
+        override val error: Throwable? = null
+    ) : UserError(message = message, error = error)
 }

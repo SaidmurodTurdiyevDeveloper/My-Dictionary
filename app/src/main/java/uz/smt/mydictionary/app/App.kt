@@ -8,5 +8,9 @@ import dagger.hilt.android.HiltAndroidApp
  *  7/8/2024  6:46 PM  Asus Rog
  */
 @HiltAndroidApp
-class App:Application() {
+class App : Application(){
+    override fun onCreate() {
+        super.onCreate()
+
+    }
 }

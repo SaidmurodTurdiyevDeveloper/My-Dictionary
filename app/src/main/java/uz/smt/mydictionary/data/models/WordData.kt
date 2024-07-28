@@ -9,7 +9,9 @@ data class WordData(
     val eng: String,
     val ru: String,
     val uzb: String,
-    val examples: List<String>,
+    val ruExample: List<String>,
+    val uzExample: List<String>,
+    val engExample: List<String>,
     val description: String?
 )
 
@@ -18,7 +20,9 @@ fun getEmptyWordData(
     eng: String? = null,
     ru: String? = null,
     uzb: String? = null,
-    examples: List<String>? = null,
+    ruExamples: List<String>? = null,
+    uzExamples: List<String>? = null,
+    engExamples: List<String>? = null,
     description: String? = null
 ): WordData {
     return WordData(
@@ -26,7 +30,9 @@ fun getEmptyWordData(
         eng = eng ?: "",
         ru = ru ?: "",
         uzb = uzb ?: "",
-        examples = examples ?: emptyList(),
+        ruExample = ruExamples ?: emptyList(),
+        engExample = engExamples?: emptyList(),
+        uzExample = uzExamples?: emptyList(),
         description = description
     )
 }
